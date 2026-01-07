@@ -1,0 +1,62 @@
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [submittedData, setSubmittedData] = useState(null)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const formData = { name, email, password }
+    setSubmittedData(formData)
+    setName("")
+    setEmail("")
+    setPassword("")
+  }
+
+  return (
+    <div>
+      <h1>Form</h1>
+      <form onSubmit={handleSubmit}>
+        <label>Name</label>
+        <input 
+          type="text"
+          placeholder="Enter your Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <label>Email</label>
+        <input 
+          type="email"
+          placeholder="Enter your Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <label>Password</label>
+        <input 
+          type="password"
+          placeholder="Enter your Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">Submit</button>
+      </form>
+
+      {submittedData && (
+        <div className="submitted-info">
+          <h2>Submitted Data</h2>
+          <p><strong>Name:</strong> {submittedData.name}</p>
+          <p><strong>Email:</strong> {submittedData.email}</p>
+          <p><strong>Password:</strong> {submittedData.password}</p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default App
